@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A tiny page for Bojji 🐸👑</title>
+<meta name="theme-color" content="#0f1115" />
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#171a21;
+    --panel2:#1d212a;
+    --text:#f5f1e8;
+    --muted:#aeb4c0;
+    --line:#2a303a;
+    --soft:#222832;
+    --gold:#e7c873;
+    --green:#9fc3a7;
+    --cream:#f0e9da;
+    --shadow:0 18px 60px rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 8%, rgba(159,195,167,.10), transparent 30%),
+      radial-gradient(circle at 85% 15%, rgba(231,200,115,.09), transparent 26%),
+      var(--bg);
+    color:var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .hero{
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    position:relative;
+  }
+  .hero-card{
+    width:min(760px,100%);
+    padding:40px 24px;
+  }
+  .eyebrow{
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:.78rem;
+    color:var(--muted);
+    margin-bottom:18px;
+  }
+  h1,h2,h3{line-height:1.12;margin:0}
+  h1{
+    font-size:clamp(2.7rem,8vw,5.6rem);
+    letter-spacing:-.045em;
+  }
+  h2{
+    font-size:clamp(2rem,5vw,3.35rem);
+    letter-spacing:-.035em;
+  }
+  h3{font-size:1.15rem}
+  .sub{
+    font-size:clamp(1rem,2.4vw,1.18rem);
+    color:var(--muted);
+    max-width:610px;
+    margin:20px auto 0;
+  }
+  .tiny{font-size:.9rem;color:var(--muted)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    gap:8px;margin-top:28px;padding:13px 18px;border-radius:999px;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);
+    color:var(--text);text-decoration:none;font-weight:650;
+    transition:.2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.06)}
+  .mascot{
+    width:88px;height:88px;border-radius:50%;
+    margin:0 auto 24px;display:grid;place-items:center;
+    background:linear-gradient(145deg,#0b0d11,#1b2028);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    font-size:2rem;
+    position:relative;
+  }
+  .mascot:before{
+    content:"";
+    position:absolute;inset:20px 12px 12px;
+    background:#050607;border-radius:50% 46% 52% 48%;
+    transform:rotate(-4deg);
+  }
+  .mascot:after{
+    content:"👑";
+    position:absolute;top:-18px;right:2px;font-size:1.6rem;
+    transform:rotate(12deg);
+  }
+  .frog{position:relative;z-index:2;filter:grayscale(1);opacity:.88}
+
+  section{padding:92px 0;border-top:1px solid rgba(255,255,255,.04)}
+  .section-num{
+    font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:12px
+  }
+  .lead{
+    font-size:clamp(1.2rem,2.6vw,1.45rem);
+    color:var(--cream);margin-top:24px
+  }
+  .copy{color:#d8dce3;font-size:1.04rem}
+  .copy p{margin:0 0 18px}
+  .em{
+    color:var(--text);
+    font-weight:700;
+  }
+  .quote{
+    margin:28px 0;
+    padding:24px 24px 24px 26px;
+    border-left:3px solid var(--gold);
+    background:linear-gradient(90deg,rgba(231,200,115,.08),transparent);
+    border-radius:0 16px 16px 0;
+    font-size:1.18rem;
+  }
+  .timeline{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;margin-top:30px;
+  }
+  .tile{
+    padding:20px;border:1px solid var(--line);border-radius:18px;
+    background:rgba(255,255,255,.025);
+    min-height:155px;
+    transition:.2s ease;
+  }
+  .tile:hover{transform:translateY(-3px);background:rgba(255,255,255,.045)}
+  .tile .ico{font-size:1.5rem;margin-bottom:12px}
+  .tile p{margin:8px 0 0;color:var(--muted);font-size:.92rem}
+  .cards{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px
+  }
+  .card{
+    border:1px solid var(--line);border-radius:20px;padding:22px;
+    background:var(--panel);
+  }
+  .card p{margin:8px 0 0;color:#d1d5dd}
+  .kingdom{
+    margin-top:28px;padding:26px;border-radius:24px;
+    background:linear-gradient(145deg,rgba(231,200,115,.08),rgba(159,195,167,.06));
+    border:1px solid var(--line);
+  }
+  .progress{
+    height:14px;border-radius:99px;background:#0a0c10;
+    border:1px solid #242a33;overflow:hidden;margin:16px 0 10px;
+  }
+  .bar{
+    height:100%;width:68%;
+    background:linear-gradient(90deg,var(--green),var(--gold));
+    animation:load 2.2s ease-out both;
+  }
+  @keyframes load{from{width:0}to{width:68%}}
+  .console{
+    margin-top:18px;padding:18px;border-radius:16px;background:#0b0d11;
+    border:1px solid #222833;color:#cdd2da;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.9rem;
+  }
+  .big-belief{
+    text-align:center;padding:38px 20px;
+    border-radius:24px;background:var(--panel2);border:1px solid var(--line);
+    margin-top:28px;
+  }
+  .big-belief strong{
+    display:block;font-size:clamp(2rem,7vw,4.5rem);
+    letter-spacing:-.05em;margin-bottom:12px;color:var(--cream)
+  }
+  .return-line{
+    margin:28px 0;padding:28px;border-radius:22px;
+    background:linear-gradient(145deg,rgba(159,195,167,.09),rgba(255,255,255,.02));
+    border:1px solid var(--line);
+    text-align:center;
+  }
+  .return-line .vn{
+    font-size:clamp(1.7rem,5vw,3rem);font-weight:800;letter-spacing:-.035em;
+    color:var(--cream)
+  }
+  .terms{
+    margin-top:28px;border:1px solid var(--line);border-radius:22px;
+    background:var(--panel);overflow:hidden;
+  }
+  .terms-head{
+    padding:18px 22px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:14px;align-items:center
+  }
+  .terms-body{padding:20px 22px}
+  .term-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+  .term{padding:10px 0;border-bottom:1px dashed #2e3540;color:#d9dde4}
+  .accept{
+    margin-top:18px;border:0;border-radius:14px;padding:12px 16px;
+    background:var(--cream);color:#111;font-weight:800;cursor:pointer;
+    width:100%;font-size:1rem;
+  }
+  .accept:hover{filter:brightness(.96)}
+  .accepted{
+    display:none;margin-top:12px;text-align:center;color:var(--gold);font-weight:700
+  }
+  .final{
+    text-align:center;padding:120px 0 130px;
+  }
+  .final h2{font-size:clamp(2.8rem,8vw,5.5rem)}
+  .signature{
+    margin-top:28px;font-size:1.2rem;color:var(--cream)
+  }
+  .footer-note{margin-top:46px;color:#7e8794;font-size:.82rem}
+  .float{
+    position:fixed;right:18px;bottom:18px;width:44px;height:44px;
+    border-radius:50%;display:grid;place-items:center;text-decoration:none;
+    background:#181c23;border:1px solid var(--line);box-shadow:var(--shadow);
+    opacity:.9
+  }
+  .reveal{opacity:0;transform:translateY(18px);transition:.65s ease}
+  .reveal.on{opacity:1;transform:none}
+  @media(max-width:700px){
+    section{padding:72px 0}
+    .timeline{grid-template-columns:1fr 1fr}
+    .cards{grid-template-columns:1fr}
+    .term-grid{grid-template-columns:1fr}
+    .hero-card{padding:20px 4px}
+  }
+  @media(max-width:460px){
+    .timeline{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero" id="top">
+  <div class="wrap hero-card reveal">
+    <div class="mascot"><span class="frog">🐸</span></div>
+    <div class="eyebrow">A tiny page for Bojji</div>
+    <h1>because apparently saying<br>“thank you for the food”<br>normally is too difficult for me =)))</h1>
+    <p class="sub">So I made an unnecessarily elaborate page instead.</p>
+    <a class="btn" href="#food">open the tiny emotional file ↓</a>
+  </div>
+</div>
+
+<section id="food">
+  <div class="wrap reveal">
+    <div class="section-num">01 — it’s not really about the food</div>
+    <h2>Thank you for thinking of me when you didn’t have to.</h2>
+    <div class="copy">
+      <p class="lead">The food is nice — obviously. I take food very seriously. =)))</p>
+      <p>But what stayed with me was something much simpler:</p>
+      <div class="quote"><strong>you thought of me.</strong></div>
+      <p>I told you before that I’m usually the giver. I’m not very good at being on the receiving end.</p>
+      <p>So maybe this is me learning to receive a kind gesture, appreciate it, and simply say:</p>
+      <p class="em">thank you, Khôi.</p>
+      <p>It meant more to me than you probably realized.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal">
+    <div class="section-num">02 — somehow, we became friends</div>
+    <h2>No grand origin story. Just a hundred tiny things.</h2>
+
+    <div class="timeline">
+      <div class="tile"><div class="ico">📧</div><h3>Work emails</h3><p>where apparently all great friendships begin.</p></div>
+      <div class="tile"><div class="ico">☕</div><h3>Coffee</h3><p>that somehow contained less work than expected.</p></div>
+      <div class="tile"><div class="ico">🐸</div><h3>Frogs</h3><p>an unreasonable number of frogs entered this storyline.</p></div>
+      <div class="tile"><div class="ico">🍵</div><h3>Matcha</h3><p>two jars somehow travelled further than expected.</p></div>
+      <div class="tile"><div class="ico">🧝</div><h3>Frieren</h3><p>seeing an anime character somewhere became a perfectly valid reason to send me a photo.</p></div>
+      <div class="tile"><div class="ico">👑</div><h3>Startup</h3><p>Bojji decided to build a kingdom.</p></div>
+      <div class="tile"><div class="ico">🌏</div><h3>Random life updates</h3><p>some serious, some stupid, usually both.</p></div>
+      <div class="tile"><div class="ico">🥃</div><h3>Questionable drinking</h3><p>please remain alive long enough to become King.</p></div>
+      <div class="tile"><div class="ico">🍜</div><h3>And now… food</h3><p>because international friendship logistics have escalated.</p></div>
+    </div>
+
+    <div class="copy" style="margin-top:34px">
+      <p>There wasn’t really a moment when I thought, <span class="em">“Oh. This person became my friend.”</span></p>
+      <p>It just happened.</p>
+      <p>Somewhere between work emails, coffee, frogs, matcha, Frieren, random life updates and very questionable drinking decisions, you became a friend I genuinely appreciate.</p>
+      <p class="em">And I’m glad you did.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal">
+    <div class="section-num">03 — things I appreciate about you</div>
+    <h2>The actual person behind all the frog lore.</h2>
+
+    <div class="cards">
+      <div class="card"><h3>Curious</h3><p>You ask questions. Including some extremely random ones. =)))</p></div>
+      <div class="card"><h3>Humble</h3><p>You can have a lot available to you and still care about building something of your own.</p></div>
+      <div class="card"><h3>Kind</h3><p>You remember people in ordinary moments. I think that matters more than people realize.</p></div>
+      <div class="card"><h3>Trying</h3><p>You’re willing to build, learn, worry, adjust, and keep going anyway.</p></div>
+    </div>
+
+    <div class="copy" style="margin-top:28px">
+      <p>I appreciate your weird little world of things you genuinely care about — and the fact that you let me see little pieces of that world sometimes.</p>
+      <div class="quote"><strong>You’re a good person, Khôi.</strong><br>And I hope life never makes you lose that.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal">
+    <div class="section-num">04 — thank you for this friendship</div>
+    <h2>Some friendships are built from big moments. Ours feels more like a hundred tiny ones.</h2>
+
+    <div class="copy">
+      <p class="lead">I don’t know where life will take either of us. We both seem pretty good at randomly ending up in different places anyway. =)))</p>
+      <p>But I’m genuinely grateful that somewhere in this very strange timeline, our paths crossed.</p>
+      <p>Thank you for the coffees, the random messages, trusting me with pieces of your life, listening to pieces of mine, and all the stupid little things that somehow became part of our friendship.</p>
+      <p>And thank you for <span class="em">remembering me in ordinary moments.</span></p>
+      <div class="quote">I think some friendships become important through big moments.<br>And some become important through a hundred tiny ones.<br><strong>I think ours became the second kind.</strong></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal">
+    <div class="section-num">05 — about your little kingdom</div>
+    <h2>BOJJI STARTUP STATUS 👑</h2>
+
+    <div class="kingdom">
+      <div class="tiny">still loading…</div>
+      <div class="progress"><div class="bar"></div></div>
+      <div class="tiny">percentage completely fabricated by Kage Consulting.</div>
+
+      <div class="console">
+        BOJJI: “chị ơi em thuê được mặt bằng rùi”<br><br>
+        RACHEL CONSULTING SERVER:<br>
+        &gt; how much is the rent?<br>
+        &gt; what’s the break-even?<br>
+        &gt; how many transactions per day?<br>
+        &gt; have you considered—<br><br>
+        BOJJI: probably regretting telling me anything
+      </div>
+    </div>
+
+    <div class="big-belief">
+      <strong>I believe in you.</strong>
+      <span>Not because I think everything you do will work.</span>
+    </div>
+
+    <div class="copy" style="margin-top:26px">
+      <p>Some things won’t.</p>
+      <p>Some ideas will fail. Some decisions will be stupid. Some months will probably suck.</p>
+      <p>There will be expensive rent, annoying problems, things you didn’t predict, and days when you’ll wonder whether you should just go back to a normal job.</p>
+      <p class="em">But I still believe in you.</p>
+      <p>I believe in you because you’re willing to try. Because you’re curious enough to learn. Because you’re humble enough to know when you don’t know something.</p>
+      <p>And because I think you’re capable of becoming much more than what you can see from where you’re standing right now.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal">
+    <div class="section-num">06 — returning one thing you once gave me</div>
+    <h2>I remembered this.</h2>
+
+    <div class="copy">
+      <p>Once, when I told you how difficult my own startup journey had been, you said:</p>
+    </div>
+
+    <div class="return-line">
+      <div class="vn">“Nhờ thế chị mới great.”</div>
+    </div>
+
+    <div class="copy">
+      <p class="em">I remembered that.</p>
+      <p>So maybe one day, when you’re looking back at all the difficult parts of building your own thing, you’ll realize:</p>
+    </div>
+
+    <div class="return-line">
+      <div class="vn">nhờ thế em mới great.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal">
+    <div class="section-num">07 — Bojji → King</div>
+    <h2>I once told you that you’re Bojji and I’m Kage.</h2>
+
+    <div class="copy">
+      <p class="lead">I was joking.</p>
+      <p>Well… <span class="em">mostly. =)))</span></p>
+      <p>But there is one part I really meant.</p>
+      <div class="quote"><strong>I genuinely want to see you become King.</strong></div>
+      <p>Not the richest person. Not the biggest founder. Not some perfect version of yourself.</p>
+      <p>Just someone who built something he is proud of. Someone who took his chances. Someone who kept his kindness while becoming stronger.</p>
+      <p>Someone who can look back one day and say:</p>
+      <p class="em">“damn. I actually did it.”</p>
+      <p class="lead"><strong>That’s the King I’m rooting for.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal">
+    <div class="section-num">08 — Kage’s terms & conditions</div>
+    <h2>Support Agreement™</h2>
+
+    <div class="terms">
+      <div class="terms-head">
+        <strong>KAGE SUPPORT AGREEMENT</strong>
+        <span class="tiny">Status: suspiciously active</span>
+      </div>
+      <div class="terms-body">
+        <div class="term-grid">
+          <div class="term">✓ cheering</div>
+          <div class="term">✓ unsolicited business opinions</div>
+          <div class="term">✓ questionable tarot predictions</div>
+          <div class="term">✓ emergency “YOU CAN DO IT” messages</div>
+          <div class="term">✓ frog-related merchandise</div>
+          <div class="term">✓ reminders not to drink to death</div>
+          <div class="term">✗ giving up</div>
+          <div class="term">✗ becoming boring</div>
+        </div>
+        <button class="accept" id="acceptBtn">ACCEPT TERMS</button>
+        <div class="accepted" id="accepted">too late. contract already active =)))</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap reveal">
+    <div class="section-num">09 — and finally</div>
+    <h2>Become King, Bojji. 👑</h2>
+    <p class="sub" style="margin-top:24px">Thank you for the food.<br>But more importantly, thank you for the kindness.</p>
+    <p class="sub">Thank you for this strange, unexpected little friendship.<br>I’m really glad I got to know you beyond the emails.</p>
+    <p class="sub">Wherever our very chaotic lives take us next, I hope we both keep building lives we’re proud of.</p>
+    <div class="signature"><strong>Kage is rooting for you.</strong><br>— Dương 🖤</div>
+    <div class="footer-note">now please go run your startup instead of reading this unnecessarily elaborate thank-you page.<br><br>P.S. don’t drink to death.</div>
+  </div>
+</section>
+
+<a class="float" href="#top" aria-label="Back to top">↑</a>
+
+<script>
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('on');
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  const btn = document.getElementById('acceptBtn');
+  const accepted = document.getElementById('accepted');
+  btn.addEventListener('click', ()=>{
+    accepted.style.display='block';
+    btn.textContent='ACCEPTED (obviously)';
+    btn.disabled=true;
+    btn.style.opacity=.78;
+  });
+</script>
+</body>
+</html>
