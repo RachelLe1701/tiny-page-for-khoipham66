@@ -4,19 +4,19 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>A tiny page for Bojji 🐸👑</title>
-<meta name="theme-color" content="#0f1115" />
+<meta name="theme-color" content="#10151b" />
 <style>
   :root{
-    --bg:#0f1115;
-    --panel:#171a21;
-    --panel2:#1d212a;
+    --bg:#10151b;
+    --panel:#182129;
+    --panel2:#202b34;
     --text:#f5f1e8;
     --muted:#aeb4c0;
     --line:#2a303a;
     --soft:#222832;
     --gold:#e7c873;
-    --green:#9fc3a7;
-    --cream:#f0e9da;
+    --green:#a9d6b0;
+    --cream:#fff3dc;
     --shadow:0 18px 60px rgba(0,0,0,.28);
   }
   *{box-sizing:border-box}
@@ -24,8 +24,9 @@
   body{
     margin:0;
     background:
-      radial-gradient(circle at 15% 8%, rgba(159,195,167,.10), transparent 30%),
-      radial-gradient(circle at 85% 15%, rgba(231,200,115,.09), transparent 26%),
+      radial-gradient(circle at 12% 8%, rgba(169,214,176,.16), transparent 28%),
+      radial-gradient(circle at 88% 14%, rgba(231,200,115,.13), transparent 25%),
+      radial-gradient(circle at 50% 58%, rgba(116,163,186,.07), transparent 32%),
       var(--bg);
     color:var(--text);
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -99,6 +100,28 @@
   }
   .frog{position:relative;z-index:2;filter:grayscale(1);opacity:.88}
 
+  .story-doodles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;opacity:.14}
+  .story-doodles span{position:absolute;font-size:clamp(2.2rem,5vw,4.8rem);filter:grayscale(.15);animation:drift 9s ease-in-out infinite}
+  .story-doodles .d1{left:3%;top:13%;transform:rotate(-14deg)}
+  .story-doodles .d2{right:4%;top:29%;animation-delay:-2s;transform:rotate(12deg)}
+  .story-doodles .d3{left:5%;top:58%;animation-delay:-5s}
+  .story-doodles .d4{right:5%;top:76%;animation-delay:-7s;transform:rotate(-10deg)}
+  .story-doodles .d5{left:44%;top:43%;font-size:2rem;opacity:.45;animation-delay:-3s}
+  @keyframes drift{0%,100%{translate:0 0}50%{translate:0 -14px}}
+  body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+  .hero,section,.float{position:relative;z-index:1}
+  .memory-strip{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px}
+  .memory-card{margin:0;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:rgba(255,255,255,.035);box-shadow:var(--shadow)}
+  .memory-card img{display:block;width:100%;height:320px;object-fit:cover}
+  .memory-card.tall img{height:430px;object-fit:cover}
+  .memory-card.contain img{object-fit:contain;background:#ebe8df;padding:8px}
+  .memory-card figcaption{padding:15px 17px 17px;color:var(--muted);font-size:.9rem}
+  .memory-card figcaption strong{color:var(--cream)}
+  .single-memory{margin-top:34px}
+  .single-memory .memory-card{max-width:680px;margin:0 auto}
+  .photo-finale{margin:34px auto 0;max-width:640px}
+  .photo-finale img{height:auto;max-height:720px;object-fit:contain;background:#111820}
+  .sticker-row{display:flex;justify-content:center;gap:18px;margin:26px 0 0;font-size:2rem;opacity:.85}
   section{padding:92px 0;border-top:1px solid rgba(255,255,255,.04)}
   .section-num{
     font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;
@@ -225,6 +248,9 @@
     .cards{grid-template-columns:1fr}
     .term-grid{grid-template-columns:1fr}
     .hero-card{padding:20px 4px}
+    .memory-strip{grid-template-columns:1fr}
+    .memory-card img,.memory-card.tall img{height:auto;max-height:520px}
+    .story-doodles{opacity:.09}
   }
   @media(max-width:460px){
     .timeline{grid-template-columns:1fr}
@@ -232,6 +258,9 @@
 </style>
 </head>
 <body>
+<div class="story-doodles" aria-hidden="true">
+  <span class="d1">🐸</span><span class="d2">🏀</span><span class="d3">🚕</span><span class="d4">🧝‍♀️</span><span class="d5">✨</span>
+</div>
 
 <div class="hero" id="top">
   <div class="wrap hero-card reveal">
@@ -239,6 +268,7 @@
     <div class="eyebrow">A tiny page for Bojji</div>
     <h1>because apparently saying<br>“thank you for the food”<br>normally is too difficult for me =)))</h1>
     <p class="sub">So I made an unnecessarily elaborate page instead.</p>
+    <div class="sticker-row" aria-hidden="true"><span>🧝‍♀️</span><span>🐸</span><span>🏀</span><span>🚕</span></div>
     <a class="btn" href="#food">open the tiny emotional file ↓</a>
   </div>
 </div>
@@ -276,6 +306,17 @@
       <div class="tile"><div class="ico">🍜</div><h3>And now… food</h3><p>because international friendship logistics have escalated.</p></div>
     </div>
 
+    <div class="memory-strip">
+      <figure class="memory-card">
+        <img src="images/cafe.png" alt="The cafe where Dương and Khôi met" loading="lazy">
+        <figcaption><strong>☕ one of the coffee chapters</strong><br>where somehow there was less work than expected.</figcaption>
+      </figure>
+      <figure class="memory-card">
+        <img src="images/wooden-frog.png" alt="Wooden frog displayed on a shelf" loading="lazy">
+        <figcaption><strong>🐸 the Yunnan frog found a home</strong><br>still one of my favorite tiny plot developments.</figcaption>
+      </figure>
+    </div>
+
     <div class="copy" style="margin-top:34px">
       <p>There wasn’t really a moment when I thought, <span class="em">“Oh. This person became my friend.”</span></p>
       <p>It just happened.</p>
@@ -292,9 +333,20 @@
 
     <div class="cards">
       <div class="card"><h3>Curious</h3><p>You ask questions. Including some extremely random ones. =)))</p></div>
-      <div class="card"><h3>Humble</h3><p>You can have a lot available to you and still care about building something of your own.</p></div>
+      <div class="card"><h3>Humble</h3><p>You could choose an easier path, and still you care about building something of your own.</p></div>
       <div class="card"><h3>Kind</h3><p>You remember people in ordinary moments. I think that matters more than people realize.</p></div>
       <div class="card"><h3>Trying</h3><p>You’re willing to build, learn, worry, adjust, and keep going anyway.</p></div>
+    </div>
+
+    <div class="memory-strip">
+      <figure class="memory-card contain">
+        <img src="images/frieren-drawing.png" alt="A hand-drawn Frieren and frog basketball scene" loading="lazy">
+        <figcaption><strong>🧝‍♀️ from me to you</strong><br>apparently my support package includes hand-drawn Frieren, frogs, basketball and photobooths.</figcaption>
+      </figure>
+      <figure class="memory-card">
+        <img src="images/frieren-gift.png" alt="Frieren gift" loading="lazy">
+        <figcaption><strong>🧝‍♀️ from you to me</strong><br>because somehow Frieren became part of the friendship language too.</figcaption>
+      </figure>
     </div>
 
     <div class="copy" style="margin-top:28px">
@@ -434,6 +486,12 @@
     <p class="sub" style="margin-top:24px">Thank you for the food.<br>But more importantly, thank you for the kindness.</p>
     <p class="sub">Thank you for this strange, unexpected little friendship.<br>I’m really glad I got to know you beyond the emails.</p>
     <p class="sub">Wherever our very chaotic lives take us next, I hope we both keep building lives we’re proud of.</p>
+    <div class="photo-finale">
+      <figure class="memory-card">
+        <img src="images/first-photo.png" alt="A first and only group photo together" loading="lazy">
+        <figcaption><strong>📸 the first — and somehow still the only — photo</strong><br>proof that at least once, we existed in the same frame instead of in emails and chat bubbles. =)))</figcaption>
+      </figure>
+    </div>
     <div class="signature"><strong>Kage is rooting for you.</strong><br>— Dương 🖤</div>
     <div class="footer-note">now please go run your startup instead of reading this unnecessarily elaborate thank-you page.<br><br>P.S. don’t drink to death.</div>
   </div>
